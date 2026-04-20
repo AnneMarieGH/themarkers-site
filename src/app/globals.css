@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+:root {
+  --background: #FAFAF8;
+  --foreground: #1A1A1A;
+  --accent: #C9A96E;
+  --accent-dark: #A8853A;
+  --muted: #6B6B6B;
+  --border: #E5E5E0;
+  --font-inter: 'Inter', system-ui, sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-serif {
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.prose-editorial {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.125rem;
+  line-height: 1.85;
+  color: #2A2A2A;
+}
