@@ -1,10 +1,11 @@
 import Stripe from 'stripe'
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error('STRIPE_SECRET_KEY is not set')
+// Stripe is used for THE-4 (subscription billing) — not required for MVP content site.
+if (process.env.NODE_ENV === 'production' && !process.env.STRIPE_SECRET_KEY) {
+  console.warn('STRIPE_SECRET_KEY not set — Stripe features unavailable.')
 }
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? 'sk_placeholder', {
   apiVersion: '2026-03-25.dahlia',
   typescript: true,
 })

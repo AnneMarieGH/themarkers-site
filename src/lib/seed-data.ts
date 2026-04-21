@@ -1,0 +1,186 @@
+// Seed data imported from themarkers.replit.app — used for local dev preview
+// when Supabase is not yet configured.
+
+import type { Article, Category } from './types'
+
+export const seedCategories: Category[] = [
+  { id: 1, title: 'Business', slug: 'business' },
+  { id: 2, title: 'Careers', slug: 'careers' },
+  { id: 3, title: 'Culture', slug: 'culture' },
+  { id: 4, title: 'Entrepreneurship', slug: 'entrepreneurship' },
+  { id: 5, title: 'Finance', slug: 'finance' },
+  { id: 6, title: 'Lifestyle', slug: 'lifestyle' },
+  { id: 7, title: 'Technology', slug: 'technology' },
+  { id: 8, title: 'Science', slug: 'science' },
+  { id: 9, title: 'Environment', slug: 'environment' },
+  { id: 10, title: 'People', slug: 'people' },
+]
+
+function cat(name: string): Category {
+  return seedCategories.find((c) => c.title.toLowerCase() === name.toLowerCase())
+    ?? { id: 0, title: name, slug: name.toLowerCase().replace(/\s+/g, '-') }
+}
+
+export const seedArticles: Article[] = [
+  {
+    id: 6, slug: 'hello-and-welcome', title: 'Hello and Welcome',
+    excerpt: 'How NBA dreams became The Markers.',
+    content: `Growing up in Bass Hill Sydney, this skinny Vietnamese kid wanted to be an NBA player.\n\nOf course there was zero chance of it happening, but I believed it.\n\nI'd wake up early to shoot hoops. Lunch? No, hoops. After school, hoops until dark. I even convinced my father to put up a hoop in our backyard.\n\nBut years later I realised something interesting. The reason why I was so obsessed with the NBA wasn't just about basketball.\n\nI learnt of athletes who had nothing that worked relentlessly to reach the top. They would eventually make a life for themselves and their families through talent, discipline and belief. And that made me wonder:\n\nWhat if, growing up, I had seen stories of Aussie Asians becoming Founders. Creators. Athletes. Artists. Musicians.\n\nPeople who looked like me, grew up like me, sharing the same experiences, accomplishing big dreams in Australia and abroad. I've always wondered how would that have shaped me as an individual?\n\n**That question lead to The Markers.**\n\nThe Markers is an editorial platform dedicated to highlighting Asian Australians making a positive impact in business, culture and society. And importantly, making these stories visible for everyone.\n\n**Every week we'll share:**\n\n**• Stories of Asian Australian founders and builders**\n\n**• Insights and news that shape our community**\n\n**• Lessons and key takeaways from business.**\n\nI hope that by highlighting Asian Aussies being awesome, you'll find inspiration, excitement, and perhaps the nudge to pursue your next chapter.\n\nWelcome to the start.`,
+    cover_image: 'https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/8b62dba5-e4dc-4768-84f5-1924085ecc66/ai_generated_1b789f99-5d76-43d3-94e9-ee950482997b.png?t=1773041605',
+    category: cat('Careers'), category_id: 2, author_name: 'Willtown',
+    status: 'published', is_featured: true, is_premium: false,
+    published_at: '2026-03-21T07:32:00.000Z', created_at: '2026-03-23T02:25:03.419Z', updated_at: '2026-03-23T04:33:32.363Z',
+  },
+  {
+    id: 7, slug: 'from-the-kitchen-to-the-boardroom', title: 'From the Kitchen to the Boardroom',
+    excerpt: 'Linh Nguyen spent her first years in Australia washing dishes. Today she runs a hospitality group with seven venues across Sydney and Melbourne.',
+    content: `When Linh Nguyen arrived in Australia at age 14, she spoke barely any English.\n\nHer first job was washing dishes at a Vietnamese restaurant in Cabramatta. Twelve-hour shifts. No complaints. She watched everything.\n\nShe watched how the owner spoke to staff. How he negotiated with suppliers. How he handled a bad review.\n\n"I learned more in that kitchen than I ever did in a classroom," she told me.\n\nTwenty years later, Linh runs Ngon Group, a hospitality company with seven venues across Sydney and Melbourne, a product line stocked in Coles, and a team of 140 people she is fiercely proud of.\n\n**But the path was anything but linear.**\n\nShe started her first restaurant at 28 with $40,000 in savings and a lease in Newtown that everyone told her would fail. It didn't.\n\nThe second restaurant came two years later. Then the third.\n\n"Each one taught me something I couldn't have learned any other way. You just have to be willing to fail in front of people."\n\nWhat strikes me about Linh isn't just the business success. It's the quiet conviction she carries into every room. No fanfare. No LinkedIn bragging. Just relentless, precise execution.\n\n**The lesson she keeps coming back to:**\n\nDo the work nobody wants to do, for long enough, until you understand it better than anyone else.\n\nThat's how you build something that lasts.`,
+    cover_image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80',
+    category: cat('Entrepreneurship'), category_id: 4, author_name: null,
+    status: 'published', is_featured: true, is_premium: false,
+    published_at: '2026-03-08T09:00:00.000Z', created_at: '2026-03-23T02:25:03.419Z', updated_at: '2026-03-23T02:25:03.419Z',
+  },
+  {
+    id: 8, slug: 'the-bamboo-ceiling-is-real-here-is-how-we-break-it', title: 'The Bamboo Ceiling Is Real. Here Is How We Break It.',
+    excerpt: 'Asian Australians are the most educated demographic in the country. So why are we so underrepresented in the C-suite?',
+    content: `Here is a number that should bother you: Asian Australians make up 17% of the workforce in professional services. We make up less than 4% of executive leadership.\n\nWe are the most credentialed. The most qualified. And statistically, the least likely to be promoted.\n\nThis is not an accident.\n\n**The bamboo ceiling is structural.**\n\nIt is built on the assumption that assertiveness is a Western quality. That quiet competence is not leadership material. That an accent, a name, a face that doesn't fit the mold is somehow a liability.\n\nI have spoken to dozens of Asian-Australian professionals across law, finance, tech, and medicine this year. The stories are remarkably consistent.\n\n"I was told I wasn't 'executive material' but nobody could explain what that meant," one partner-track lawyer told me.\n\n"I got feedback that I needed to be more 'visible.' I asked what that looked like. Silence," said a senior analyst at one of the big four banks.\n\n**So what do we do?**\n\nFirst, we name it. The ceiling only has power when we pretend it isn't there.\n\nSecond, we build parallel structures. Communities, networks, and platforms that elevate Asian-Australian voices outside of the traditional gatekeepers.\n\nThird, we mentor each other. Aggressively. Deliberately.\n\nThe Markers exists for this reason. Not to complain about the ceiling, but to document everyone punching through it.\n\nThere are more of us doing it than you think.`,
+    cover_image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80',
+    category: cat('Business'), category_id: 1, author_name: null,
+    status: 'published', is_featured: true, is_premium: false,
+    published_at: '2026-03-05T09:00:00.000Z', created_at: '2026-03-23T02:25:03.419Z', updated_at: '2026-03-23T02:25:03.419Z',
+  },
+  {
+    id: 9, slug: 'why-i-traded-goldman-sachs-for-a-bowl-of-pho', title: 'Why I Traded Goldman Sachs for a Bowl of Pho',
+    excerpt: 'Kevin Tran had the career everyone wanted. Six-figure salary, corner office, a title that impressed people at dinner parties. Then his mum got sick.',
+    content: `Kevin Tran spent six years at Goldman Sachs before he quit.\n\nNot because the money was bad. Not because the work was boring. He quit because his mother got sick, and sitting in a glass tower in Sydney CBD he realised he hadn't spoken to her in three weeks.\n\n"I was optimising for the wrong things," he said.\n\nHe took six months off. Cooked. Visited family in Vietnam for the first time in eight years. Ate a lot of pho.\n\n**He came back with a business plan.**\n\nPho & Co launched in Surry Hills in 2023. It is not a fusion restaurant. It is not a trend. It is exactly what Vietnamese pho should be: slow-cooked, honest, and made the way his grandmother made it.\n\nIn 18 months, Kevin has opened two more locations and built a waitlist for a fourth.\n\nI asked him if he missed the prestige of finance.\n\n"Sometimes," he said. "But I sleep better. I see my mum every Sunday. And I know that what I'm building actually matters to people."\n\n**The thing he wants other high-achievers to hear:**\n\nThe career you chose at 22 does not have to be the career you die with. Ambition and meaning are not the same thing. The sooner you figure out which one you're actually chasing, the better.\n\nPho & Co is at 42 Crown St, Surry Hills. The broth takes 18 hours. Worth every minute.`,
+    cover_image: 'https://images.unsplash.com/photo-1503764654157-72d979d9af2f?w=1200&q=80',
+    category: cat('Careers'), category_id: 2, author_name: null,
+    status: 'published', is_featured: false, is_premium: false,
+    published_at: '2026-03-03T09:00:00.000Z', created_at: '2026-03-23T02:25:03.419Z', updated_at: '2026-03-23T02:25:03.419Z',
+  },
+  {
+    id: 13, slug: 'she-started-her-business-with-2000-and-a-facebook-group', title: 'She Started Her Business With $2,000 and a Facebook Group',
+    excerpt: 'Grace Kim built a six-figure e-commerce brand from her dining room table in Burwood. She didn\'t take a single dollar of outside funding.',
+    content: `Grace Kim will tell you she was not trying to build a business.\n\nShe was trying to find Korean skincare products she couldn't get anywhere in Australia. She posted in a Facebook group asking if anyone knew where to find them. Three hundred people replied within 24 hours.\n\n"I thought: okay, there's something here."\n\nThat was four years ago. Today, Glow Ritual ships to 12 countries, has 60,000 loyal customers, and turns over seven figures annually.\n\nShe did it with $2,000 in savings, a supplier she found through a Facebook comment, and a dining room table in Burwood.\n\n**No investors. No accelerators. No outside funding of any kind.**\n\n"Every dollar we made went back into the business. It was slow at first. But when you own 100% of your company, every decision is yours. Every win is yours."\n\nThe business grew because Grace understood her customer with unusual precision. She was her customer. She knew exactly what they wanted because she had wanted it for years and couldn't find it.\n\n**This is the underrated advantage of building something for your own community.**\n\nYou don't have to guess. You don't have to research. You live the problem.\n\nGrace is now mentoring five other Asian-Australian women who are building consumer brands. She meets with them monthly. Informally. No fee.\n\n"I got lucky that the right people helped me early. I'm just paying it forward."`,
+    cover_image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1200&q=80',
+    category: cat('Entrepreneurship'), category_id: 4, author_name: null,
+    status: 'published', is_featured: false, is_premium: false,
+    published_at: '2026-02-18T09:00:00.000Z', created_at: '2026-03-23T02:25:03.419Z', updated_at: '2026-03-23T02:25:03.419Z',
+  },
+  {
+    id: 12, slug: 'how-to-raise-money-when-nobody-knows-your-name', title: 'How to Raise Money When Nobody Knows Your Name',
+    excerpt: 'Three Asian-Australian founders share the tactics, mistakes, and mindset shifts that helped them close their first rounds.',
+    content: `Nobody tells you how hard the fundraising game is when you don't look like the default founder.\n\nThe average VC partner in Australia is male, white, and went to one of six schools. This is not an opinion. This is a fact.\n\nI spoke with three Asian-Australian founders who raised in the last 18 months. Here is what actually worked.\n\n**Maya Chen, Founder of HealthStack ($2.1M seed):**\n\n"I stopped trying to be in the rooms I wasn't invited to. I created my own room. I ran a small demo day for 30 angels I had built genuine relationships with over two years. Twelve of them invested."\n\nThe key word: relationships. Not networking. Relationships.\n\n**James Yap, Founder of Flect ($800K pre-seed):**\n\n"I obsessed over my data. Every metric, every cohort, every retention curve. When your face doesn't match their mental model of a founder, your numbers have to be undeniable."\n\nUndeniable is the word. Not good. Not strong. Undeniable.\n\n**Sophia Liu, Founder of Graze ($3.5M Series A):**\n\n"I found investors who had backed founders from similar backgrounds and I went to them first. I wasn't the first Asian-Australian woman they'd bet on. That mattered."\n\n**The common thread:**\n\nNone of them tried to fit the standard narrative. They built their own.\n\nThe fundraising playbook was not written for us. So we write a new one.`,
+    cover_image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80',
+    category: cat('Finance'), category_id: 5, author_name: null,
+    status: 'published', is_featured: false, is_premium: false,
+    published_at: '2026-02-22T09:00:00.000Z', created_at: '2026-03-23T02:25:03.419Z', updated_at: '2026-03-23T02:25:03.419Z',
+  },
+  {
+    id: 10, slug: 'building-in-public-six-months-of-radical-transparency', title: 'Building in Public: What Six Months of Radical Transparency Taught Me',
+    excerpt: 'I shared our revenue numbers, our mistakes, and our near-death moments with thousands of strangers. Here is what happened.',
+    content: `Six months ago I started sharing everything.\n\nRevenue numbers. Churn. The month we almost ran out of money. The product feature that flopped spectacularly. All of it. Publicly.\n\nI was terrified.\n\nMy co-founder thought I was having a breakdown. My investors asked me to stop. I kept going.\n\n**Here is what happened:**\n\nWithin two weeks, three potential customers reached out having read our numbers. They appreciated the honesty. Two became paying clients.\n\nA developer in Melbourne read about our engineering struggles and offered to consult. We hired him full-time three months later.\n\nA founder in Singapore who had faced the same near-death moment sent a message that genuinely saved my sanity during our worst week.\n\n**What building in public is not:**\n\nIt is not oversharing for attention. It is not performing struggle for sympathy. It is not a marketing hack.\n\nIt is a commitment to treating your audience, your community, the people watching your journey, like intelligent adults who can handle the truth.\n\n**What I have learned:**\n\nVulnerability, when done with intention, is not weakness. It is differentiation.\n\nIn a world full of polished LinkedIn posts about how everything is going great, honesty is the scarcest resource in business.\n\nBe honest. Share the hard parts. The right people will find you.`,
+    cover_image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=80',
+    category: cat('Entrepreneurship'), category_id: 4, author_name: null,
+    status: 'published', is_featured: false, is_premium: false,
+    published_at: '2026-02-28T09:00:00.000Z', created_at: '2026-03-23T02:25:03.419Z', updated_at: '2026-03-23T02:25:03.419Z',
+  },
+  {
+    id: 11, slug: 'the-refugee-who-became-sydneys-most-in-demand-architect', title: "The Refugee Who Became Sydney's Most In-Demand Architect",
+    excerpt: "Tuan Pham arrived in Australia with nothing but the clothes on his back. Forty years later, his firm is reshaping Sydney's skyline.",
+    content: `Tuan Pham does not talk about his journey to Australia unless you ask directly.\n\nHe arrived as a refugee in 1981, one of thousands of Vietnamese families who made the crossing by boat. He was nine years old. He remembers being cold and scared and not understanding anything anyone said.\n\n"But I remember the sky in Sydney," he told me. "I had never seen anything so blue."\n\nHe became an architect because of that sky. He wanted to build things that pointed toward it.\n\n**Forty years later, Pham Studio is one of the most sought-after architectural firms in New South Wales.**\n\nThey have designed community centres in Western Sydney, affordable housing complexes in Parramatta, and cultural spaces that deliberately reflect the diversity of the people who use them.\n\n"Architecture is not about the building," Tuan says. "It is about who the building is for. That is the only question that matters."\n\nHis firm employs 23 people, 14 of whom are first or second generation Australians.\n\n"I want them to see themselves in the work," he said. "Not just in the company."\n\n**What Tuan wants the next generation to know:**\n\nYour background is not a deficit. It is a design brief. The experiences that made you different are the same ones that will make your work singular.\n\nBuild for the people the industry has forgotten. That is where the most meaningful work lives.`,
+    cover_image: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=80',
+    category: cat('Lifestyle'), category_id: 6, author_name: null,
+    status: 'published', is_featured: false, is_premium: false,
+    published_at: '2026-02-25T09:00:00.000Z', created_at: '2026-03-23T02:25:03.419Z', updated_at: '2026-03-23T02:25:03.419Z',
+  },
+  {
+    id: 15, slug: 'inside-the-scene-asian-australian-chefs-rewriting-sydneys-menu', title: "Inside the Scene: How Asian-Australian Chefs Are Rewriting Sydney's Menu",
+    excerpt: 'A new generation of chefs is refusing to choose between tradition and innovation. The result is some of the most exciting food in the country.',
+    content: `There is a particular kind of food that does not have a name yet.\n\nIt is not fusion. That word has been poisoned by decades of clumsy crossover cooking. It is not "modern Asian." That phrase is too vague to mean anything.\n\nIt is something more personal than either of those labels suggests.\n\nIt is what happens when a chef who grew up eating her grandmother's congee goes to cooking school in Lyon, works in a Michelin-starred kitchen in Tokyo, and then comes home to Sydney with a lease and an idea.\n\n**Amy Leung (Lunar, Surry Hills):**\nAmy spent her childhood in her family's yum cha restaurant in Chatswood, watching her aunties fold dumplings at 5am. She now runs a 40-seat restaurant where the most popular dish is a slow-braised duck served with hand-torn sourdough and a XO butter that took her three years to perfect.\n\n"I'm not trying to honour tradition or break from it. I'm just cooking what I want to eat."\n\n**Danny Park (Ssal, Newtown):**\nDanny grew up in Korea, moved to Australia at 16, and trained under some of the best French chefs in the country. His restaurant is Korean at heart but refuses to be categorised.\n\n"When people ask me what kind of food it is, I say: delicious. That's the only category that matters."\n\n**Mei Lin (Crimson, Chippendale):**\nMei is the youngest of the three at 29. She worked three years at Noma before returning to Sydney. Her tasting menu changes weekly based on what's at the market.\n\n"I never want a guest to be able to predict what they're going to eat. The surprise is part of the meal."`,
+    cover_image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200&q=80',
+    category: cat('Lifestyle'), category_id: 6, author_name: null,
+    status: 'published', is_featured: false, is_premium: false,
+    published_at: '2026-02-10T09:00:00.000Z', created_at: '2026-03-23T02:25:03.419Z', updated_at: '2026-03-23T02:25:03.419Z',
+  },
+  {
+    id: 16, slug: 'why-melbourne-is-winning-the-asian-australian-startup-war', title: 'Why Melbourne Is Winning the Asian-Australian Startup War',
+    excerpt: 'Sydney gets the headlines. But Melbourne is quietly becoming the most important city for Asian-Australian founders in the country.',
+    content: `For years, the conventional wisdom was that if you were a serious startup founder in Australia, you moved to Sydney.\n\nThat is changing.\n\nMelbourne has quietly assembled the infrastructure of a genuine startup ecosystem — and Asian-Australian founders are disproportionately at the centre of it.\n\n**The numbers:**\n\nOf the 50 fastest-growing startups in Melbourne last year, 18 were founded or co-founded by Asian Australians. That is 36% — roughly double the proportion you would expect by population.\n\n**Why Melbourne?**\n\n**Cost.** A founding team can stretch their runway significantly further in Melbourne than Sydney. When every dollar matters, that advantage is not trivial.\n\n**Culture.** Melbourne's food, arts, and social scene has been shaped by Asian communities for decades. Founders describe feeling a sense of belonging that they don't always experience in Sydney's more finance-and-media culture.\n\n**Community.** The Asian-Australian founder networks in Melbourne are tighter and more deliberately maintained. The introductions happen faster. The knowledge is shared more openly.\n\n"Sydney is where you go to raise money," one founder told me. "Melbourne is where you go to build."`,
+    cover_image: 'https://images.unsplash.com/photo-1514395462725-fb4566210144?w=1200&q=80',
+    category: cat('Business'), category_id: 1, author_name: null,
+    status: 'published', is_featured: false, is_premium: false,
+    published_at: '2026-02-07T09:00:00.000Z', created_at: '2026-03-23T02:25:03.419Z', updated_at: '2026-03-23T02:25:03.419Z',
+  },
+  {
+    id: 17, slug: 'the-quiet-power-of-the-asian-australian-dollar', title: 'The Quiet Power of the Asian-Australian Dollar',
+    excerpt: 'Asian Australians represent enormous economic power in this country. We are only beginning to understand how to use it.',
+    content: `The Asian-Australian community represents an estimated $120 billion in annual consumer spending.\n\nThat number is rarely discussed. It is rarely celebrated. It is rarely leveraged.\n\nIt should be all three.\n\n**The economic reality:**\n\nAsian Australians are the fastest-growing demographic in the country. We are disproportionately represented in high-income professions. We have high rates of property ownership and business formation.\n\nWe are, by almost any economic measure, a significant force in the Australian economy.\n\nAnd yet we are largely invisible in the marketing, leadership, and boardrooms of the companies that want our money.\n\n**What we can do:**\n\nSpend deliberately. Support Asian-Australian owned businesses where you can. Not out of obligation — out of recognition that every dollar is a vote.\n\nInvest in each other. Angel invest in Asian-Australian founders. Join the networks that are building parallel power structures.\n\nDemand visibility. When companies want our business but don't reflect our community in their leadership or marketing, say so. Clearly.\n\n**The shift is happening.**\n\nA new generation of Asian-Australian consumers is starting to make these connections explicitly. We have always had power. We are learning to use it.`,
+    cover_image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=1200&q=80',
+    category: cat('Finance'), category_id: 5, author_name: null,
+    status: 'published', is_featured: false, is_premium: false,
+    published_at: '2026-02-03T09:00:00.000Z', created_at: '2026-03-23T02:25:03.419Z', updated_at: '2026-03-23T02:25:03.419Z',
+  },
+  {
+    id: 18, slug: 'my-gap-year-changed-everything-here-is-what-i-wish-i-had-known', title: 'My Gap Year Changed Everything. Here Is What I Wish I Had Known.',
+    excerpt: 'Taking a year off between university and work felt irresponsible. It turned out to be the most important career decision I ever made.',
+    content: `I graduated from law school in December 2019 with a job offer from a top-tier firm and the creeping feeling that I had made a very expensive mistake.\n\nI didn't tell anyone that. You don't say that out loud when your parents have sacrificed what mine sacrificed to get you there.\n\nInstead, I deferred my start date and told my parents I was going travelling.\n\n**What I did:**\n\nSix months in Southeast Asia, moving slowly. Three months working at a legal aid clinic in Hanoi. Three months hiking, reading, eating, sitting with my thoughts.\n\nNo Instagram. No LinkedIn updates. Just time.\n\n**What I found:**\n\nI came back and started at the firm. But I came back different.\n\nI had perspective. I knew what I was choosing and why. I stopped performing ambition and started feeling it.\n\nFour years later, I am still at the firm. But I spend three months a year doing pro bono work in the region.\n\n**What I wish I had known:**\n\nA gap year is not a delay. It is an investment.\n\nThe year you spend figuring yourself out is not time off the path. It is the path.\n\nAnd for those of us who grew up with parents who sacrificed so much for our stability — it is okay to pause. It is okay to choose slowly.`,
+    cover_image: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200&q=80',
+    category: cat('Careers'), category_id: 2, author_name: null,
+    status: 'published', is_featured: false, is_premium: false,
+    published_at: '2026-01-29T09:00:00.000Z', created_at: '2026-03-23T02:25:03.419Z', updated_at: '2026-03-23T02:25:03.419Z',
+  },
+  {
+    id: 19, slug: 'how-one-group-chat-became-a-5-million-venture', title: 'How One Group Chat Became a $5 Million Venture',
+    excerpt: 'What started as a place for Asian-Australian founders to share resources turned into one of the most valuable networks in Australian startup culture.',
+    content: `In 2021, a WeChat group with 12 people changed the trajectory of multiple companies.\n\nIt started simply: a small group of Asian-Australian founders sharing investor contacts, legal template documents, and warnings about bad actors in the ecosystem.\n\nThe group grew. Slowly at first, then quickly.\n\nBy 2023 it had 400 members. By 2024, the informal network had been formalised into Foundry — a membership community for Asian-Australian entrepreneurs that has facilitated more than $5 million in introductions, investments, and business relationships.\n\n**What made it work:**\n\nTrust. The group started with 12 people who already knew and respected each other. Every new member was vouched for by an existing one.\n\nGenerosity. Members were expected to give as much as they received. The culture was explicit: if you take an introduction, you follow up. If you get funded, you share what you learned.\n\nSpecificity. The group was not "startup founders" in general. It was Asian-Australian founders specifically. That specificity created an intensity of shared experience that broader networks can't replicate.\n\n**What Foundry is doing now:**\n\nQuarterly meetups in Sydney, Melbourne, and Brisbane. An annual retreat. A mentorship program pairing first-time founders with experienced operators.\n\nSome things should not scale.`,
+    cover_image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1200&q=80',
+    category: cat('Business'), category_id: 1, author_name: null,
+    status: 'published', is_featured: false, is_premium: false,
+    published_at: '2026-01-25T09:00:00.000Z', created_at: '2026-03-23T02:25:03.419Z', updated_at: '2026-03-23T02:25:03.419Z',
+  },
+  {
+    id: 14, slug: 'the-art-of-the-side-hustle-when-passion-becomes-your-main-income', title: 'The Art of the Side Hustle: When Passion Becomes Your Main Income',
+    excerpt: 'Four Asian Australians who turned a weekend hobby into something that changed the course of their lives.',
+    content: `There is a moment every side hustler knows.\n\nIt is 11pm on a Tuesday. You have been working your day job for nine hours. You should be asleep. Instead you are at your kitchen table, working on the thing that actually excites you.\n\nYou are not doing it for the money. Not yet. You are doing it because it makes you feel alive.\n\n**Andy Tran, Ceramics:**\nAndy spent eight years as a civil engineer before he started making ceramics in his garage. He sold his first piece for $45. Last year his studio generated more revenue than his old salary.\n\n"I kept waiting for permission to take it seriously. Eventually I realised nobody was going to give it to me."\n\n**Jenny Wu, Illustration:**\nJenny illustrated in her lunch breaks for three years before she got her first commercial client. Now she works with brands across Australia and Southeast Asia.\n\n**Michael Huang, Food:**\nMichael started a dumpling pop-up because he was bored during lockdown. He now has a permanent stall at a Sydney market.\n\n**Lisa Nguyen, Finance to Fitness:**\nLisa was a financial analyst who coached CrossFit on weekends. She went full-time three years ago. Her gym in Marrickville has a two-month wait list.\n\n**The pattern:**\n\nNone of them quit their day jobs to pursue their passion. They built the passion into something real while still employed. They crossed when the bridge was strong enough to hold them.`,
+    cover_image: 'https://images.unsplash.com/photo-1534531173927-aeb928d54385?w=1200&q=80',
+    category: cat('Lifestyle'), category_id: 6, author_name: null,
+    status: 'published', is_featured: false, is_premium: false,
+    published_at: '2026-02-14T09:00:00.000Z', created_at: '2026-03-23T02:25:03.419Z', updated_at: '2026-03-23T02:25:03.419Z',
+  },
+  {
+    id: 5, slug: 'david-yip-alumable-video', title: 'DAVID YIP - ALUMABLE (VIDEO)',
+    excerpt: "Is Australia's education system broken? David thinks so, and plans to fix it.",
+    content: `We sit down with David Yip, Founder & CEO of [Alumable](https://www.alumable.com/), an "earn-while-you-learn" platform helping students gain real-world experience while studying.\n\nAfter being made redundant from Salesforce, David decided to launch his own startup tackling the challenging Ed-Tech space, and recently landed $1m+ Angel round funding to bring AI to jobs for uni students.\n\nDavid gets candid on why he thinks the education system is broken, how AI is reshaping the workforce, and how startups should prepare for funding pitches.\n\n[Watch the full interview](https://www.youtube.com/watch?v=Rkya9Oqo5ZA)`,
+    cover_image: 'https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/asset/file/dc948328-d7d2-412a-882a-9df54bd42201/251001_David_Yip_Full.00_08_07_08.Still003.png?t=1773202631',
+    category: cat('Entrepreneurship'), category_id: 4, author_name: 'will804',
+    status: 'published', is_featured: false, is_premium: false,
+    published_at: '2026-03-15T09:30:00.000Z', created_at: '2026-03-23T02:25:03.419Z', updated_at: '2026-03-23T04:08:16.090Z',
+  },
+  {
+    id: 22, slug: 'ying-ang-video', title: 'YING ANG - (VIDEO)',
+    excerpt: "She had a master's degree. A Stable job. And then she picked up a camera.",
+    content: `[Ying Ang](https://www.yingangphoto.com/) is a multi-award-winning Melbourne based photographer and author. She shares how she pivoted from political science to photography, her advice for building a creative career, and the dreaded moment of telling her mum she didn't want to study anymore.\n\nToday she is one of Australia's most respected photographers, curators and educators.\n\nShe also runs a creative co-working space called La Space and sits on the board of the Centre for Contemporary Photography in New York.\n\n[Watch the interview](https://www.youtube.com/watch?v=DE8Muz9EsNE)`,
+    cover_image: 'https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,quality=80,format=auto,onerror=redirect/uploads/asset/file/ae038b1c-8d9f-4570-a6ff-b42e27563b94/Final_-_Long_Version.00_01_37_16.Still004.png',
+    category: cat('Careers'), category_id: 2, author_name: 'Willtown',
+    status: 'published', is_featured: false, is_premium: false,
+    published_at: null, created_at: '2026-03-23T02:25:03.419Z', updated_at: '2026-03-23T04:33:32.419Z',
+  },
+  {
+    id: 1, slug: 'the-future-of-artificial-intelligence', title: '5 Steps to Future-Proof Your Job From AI',
+    excerpt: 'AI is reshaping work across every industry. Those who win won\'t resist, they\'ll learn to leverage it.',
+    content: `Hardly a day passes without hearing about AI impacted job cuts. It's reshaping how work gets done across every Australian business sector.\n\n**Step 1: Audit Your Workflow**\n\nAnalyse your daily tasks and identify repetitive, time-consuming or process-driven work. Then ask: Can AI assist, automate or accelerate these?\n\n**Step 2: Build AI Fluency**\n\nAI fluency is quickly becoming foundational at work. Block out some weekly time to experiment and stay current. Passive awareness is no longer enough.\n\n**Step 3: Get Close To The Action**\n\nIf AI is already a priority within your organisation, position yourself close to it. Volunteer for pilot programs. Join internal initiatives.\n\n**Step 4: Elevate Your Value**\n\nValue is shifting more towards strategic thinking, effective communication, and resource management.\n\n**Step 5: Keep Calm**\n\nAI is a tool, not a verdict. Professionals who thrive will be those who integrate AI into daily workflows thoughtfully and strategically.`,
+    cover_image: null,
+    category: cat('Technology'), category_id: 7, author_name: 'The Editorial Team',
+    status: 'published', is_featured: false, is_premium: false,
+    published_at: '2026-03-19T07:06:00.000Z', created_at: '2026-03-23T02:25:03.419Z', updated_at: '2026-03-23T04:03:22.356Z',
+  },
+]
+
+// Sort by published_at desc (nulls last)
+seedArticles.sort((a, b) => {
+  if (!a.published_at && !b.published_at) return 0
+  if (!a.published_at) return 1
+  if (!b.published_at) return -1
+  return new Date(b.published_at).getTime() - new Date(a.published_at).getTime()
+})

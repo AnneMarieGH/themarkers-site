@@ -1,12 +1,10 @@
 import type { MetadataRoute } from 'next'
-import { client } from '@/lib/sanity'
-import { articlesQuery } from '@/lib/queries'
-import type { Article } from '@/lib/types'
+import { getPublishedArticles } from '@/lib/db'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://theethnicaustralia.com'
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://themarkers.com.au'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const articles: Article[] = await client.fetch(articlesQuery).catch(() => [])
+  const articles = await getPublishedArticles().catch(() => [])
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: siteUrl, lastModified: new Date(), changeFrequency: 'daily', priority: 1 },
@@ -15,7 +13,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const articleRoutes: MetadataRoute.Sitemap = articles.map((a) => ({
     url: `${siteUrl}/articles/${a.slug}`,
-    lastModified: new Date(a.publishedAt ?? a._createdAt),
+    lastModified: new Date(a.updated_at),
     changeFrequency: 'weekly',
     priority: 0.7,
   }))

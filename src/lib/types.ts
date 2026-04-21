@@ -1,55 +1,34 @@
-export interface Author {
-  name: string
-  slug: string
-  image?: SanityImage
-  bio?: PortableTextBlock[]
-}
-
 export interface Category {
-  _id?: string
+  id: number
   title: string
   slug: string
-  description?: string
-}
-
-export interface SanityImage {
-  _type: 'image'
-  asset: {
-    _ref: string
-    _type: 'reference'
-  }
-  alt?: string
-  hotspot?: {
-    x: number
-    y: number
-    height: number
-    width: number
-  }
-}
-
-export interface PortableTextBlock {
-  _type: string
-  _key: string
-  style?: string
-  children?: Array<{
-    _type: string
-    _key: string
-    text: string
-    marks?: string[]
-  }>
+  description?: string | null
+  color?: string | null
+  created_at?: string
 }
 
 export interface Article {
-  _id: string
-  _createdAt: string
+  id: number
   title: string
   slug: string
-  excerpt?: string
-  publishedAt: string
-  readingTime?: number
-  mainImage?: SanityImage
-  author?: Author
-  categories?: Category[]
-  body?: PortableTextBlock[]
-  isPremium?: boolean
+  excerpt?: string | null
+  content?: string | null
+  cover_image?: string | null
+  category_id?: number | null
+  category?: Category | null
+  author_name?: string | null
+  status: 'draft' | 'published'
+  is_featured: boolean
+  is_premium: boolean
+  published_at?: string | null
+  created_at: string
+  updated_at: string
+}
+
+export interface AdminUser {
+  id: string
+  email: string
+  name: string
+  role: 'admin' | 'editor'
+  created_at: string
 }

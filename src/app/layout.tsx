@@ -6,26 +6,26 @@ import { Footer } from '@/components/layout/Footer'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://theethnicaustralia.com'
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://themarkers.com.au'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'The Ethnic Australia — Celebrating Asian Australian Excellence',
-    template: '%s | The Ethnic Australia',
+    default: 'The Markers — Celebrating Asian Australian Excellence',
+    template: '%s | The Markers',
   },
   description:
-    'A refined publication celebrating Asian Australian entrepreneurs, businesses, and individuals making a positive impact. Stories, profiles, and perspectives from the community.',
+    'A refined publication celebrating Asian Australian entrepreneurs, businesses, and individuals making a positive impact. Stories, profiles, and perspectives.',
   openGraph: {
     type: 'website',
     locale: 'en_AU',
     url: siteUrl,
-    siteName: 'The Ethnic Australia',
+    siteName: 'The Markers',
     images: [{ url: '/og-default.jpg', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@ethnicaustralia',
+    site: '@themarkers_au',
   },
   robots: {
     index: true,

@@ -2,141 +2,100 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import { client, urlFor } from '@/lib/sanity'
-import { articleBySlugQuery, articlesQuery } from '@/lib/queries'
-import type { Article } from '@/lib/types'
+import { getArticleBySlug, getPublishedArticles } from '@/lib/db'
 import { formatDate } from '@/lib/utils'
-import { PortableTextRenderer } from '@/components/content/PortableTextRenderer'
+import { MarkdownRenderer } from '@/components/content/MarkdownRenderer'
 import { NewsletterSignup } from '@/components/content/NewsletterSignup'
 import { PremiumGate } from '@/components/content/PremiumGate'
 import { checkMembership } from '@/lib/membership'
 
 export const revalidate = 60
 
-type Props = {
-  params: Promise<{ slug: string }>
-}
+type Props = { params: Promise<{ slug: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const article: Article | null = await client.fetch(articleBySlugQuery, { slug }).catch(() => null)
-
+  const article = await getArticleBySlug(slug)
   if (!article) return {}
-
-  const imageUrl = article.mainImage ? urlFor(article.mainImage).width(1200).height(630).url() : undefined
-
   return {
     title: article.title,
-    description: article.excerpt,
+    description: article.excerpt ?? undefined,
     openGraph: {
       title: article.title,
-      description: article.excerpt,
+      description: article.excerpt ?? undefined,
       type: 'article',
-      publishedTime: article.publishedAt,
-      authors: article.author ? [article.author.name] : undefined,
-      images: imageUrl ? [{ url: imageUrl, width: 1200, height: 630 }] : undefined,
+      publishedTime: article.published_at ?? undefined,
+      authors: article.author_name ? [article.author_name] : undefined,
+      images: article.cover_image ? [{ url: article.cover_image, width: 1200, height: 630 }] : undefined,
     },
     twitter: {
       card: 'summary_large_image',
       title: article.title,
-      description: article.excerpt,
-      images: imageUrl ? [imageUrl] : undefined,
+      description: article.excerpt ?? undefined,
+      images: article.cover_image ? [article.cover_image] : undefined,
     },
   }
 }
 
 export async function generateStaticParams() {
-  const articles: Article[] = await client.fetch(articlesQuery).catch(() => [])
+  const articles = await getPublishedArticles()
   return articles.map((a) => ({ slug: a.slug }))
 }
 
 export default async function ArticlePage({ params }: Props) {
   const { slug } = await params
-  const [article, isMember]: [Article | null, boolean] = await Promise.all([
-    client.fetch(articleBySlugQuery, { slug }).catch(() => null),
+  const [article, isMember] = await Promise.all([
+    getArticleBySlug(slug),
     checkMembership(),
   ])
 
   if (!article) notFound()
 
-  const showGate = article.isPremium && !isMember
-
-  const heroImageUrl = article.mainImage
-    ? urlFor(article.mainImage).width(1200).height(630).auto('format').url()
-    : null
+  const showGate = article.is_premium && !isMember
 
   return (
     <>
       <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        {/* Breadcrumb */}
         <nav className="text-xs text-[#6B6B6B] mb-6 flex items-center gap-2">
           <Link href="/" className="hover:text-[#1A1A1A] transition-colors">Home</Link>
           <span>/</span>
           <Link href="/articles" className="hover:text-[#1A1A1A] transition-colors">Stories</Link>
-          {article.categories?.[0] && (
+          {article.category && (
             <>
               <span>/</span>
-              <span>{article.categories[0].title}</span>
+              <span>{article.category.title}</span>
             </>
           )}
         </nav>
 
-        {/* Category */}
-        {article.categories?.[0] && (
+        {article.category && (
           <div className="mb-3">
-            <span className="text-[#C9A96E] text-xs font-semibold uppercase tracking-widest">{article.categories[0].title}</span>
+            <span className="text-[#C9A96E] text-xs font-semibold uppercase tracking-widest">{article.category.title}</span>
           </div>
         )}
 
-        {/* Title */}
-        <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">
-          {article.title}
-        </h1>
+        <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">{article.title}</h1>
 
-        {/* Excerpt */}
         {article.excerpt && (
           <p className="text-[#6B6B6B] text-lg leading-relaxed mb-6 font-serif italic">{article.excerpt}</p>
         )}
 
-        {/* Meta */}
         <div className="flex items-center gap-3 text-sm text-[#6B6B6B] pb-6 border-b border-[#E5E5E0] mb-8">
-          {article.author && (
-            <span className="font-medium text-[#1A1A1A]">{article.author.name}</span>
-          )}
-          {article.publishedAt && (
-            <>
-              <span>·</span>
-              <time dateTime={article.publishedAt}>{formatDate(article.publishedAt)}</time>
-            </>
-          )}
-          {article.readingTime && (
-            <>
-              <span>·</span>
-              <span>{article.readingTime} min read</span>
-            </>
+          {article.author_name && <span className="font-medium text-[#1A1A1A]">{article.author_name}</span>}
+          {article.published_at && (
+            <><span>·</span><time dateTime={article.published_at}>{formatDate(article.published_at)}</time></>
           )}
         </div>
 
-        {/* Hero image */}
-        {heroImageUrl && (
+        {article.cover_image && (
           <figure className="mb-8 -mx-4 sm:mx-0">
             <div className="relative aspect-[16/9] overflow-hidden rounded-sm">
-              <Image
-                src={heroImageUrl}
-                alt={article.mainImage?.alt ?? article.title}
-                fill
-                className="object-cover"
-                priority
-              />
+              <Image src={article.cover_image} alt={article.title} fill className="object-cover" priority unoptimized />
             </div>
-            {article.mainImage?.alt && (
-              <figcaption className="text-xs text-[#6B6B6B] text-center mt-2 px-4">{article.mainImage.alt}</figcaption>
-            )}
           </figure>
         )}
 
-        {/* Premium badge */}
-        {article.isPremium && (
+        {article.is_premium && (
           <div className="mb-6">
             <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#C9A96E] border border-[#C9A96E] rounded-sm px-2 py-0.5 uppercase tracking-widest">
               ✦ Members Only
@@ -144,39 +103,19 @@ export default async function ArticlePage({ params }: Props) {
           </div>
         )}
 
-        {/* Body */}
-        {article.body && !showGate && (
+        {article.content && !showGate && (
           <div className="prose-editorial">
-            <PortableTextRenderer value={article.body} />
+            <MarkdownRenderer content={article.content} />
           </div>
         )}
-        {article.body && showGate && (
+
+        {article.content && showGate && (
           <>
             <div className="prose-editorial">
-              <PortableTextRenderer value={article.body.slice(0, 2)} />
+              <MarkdownRenderer content={article.content.split('\n\n').slice(0, 3).join('\n\n')} />
             </div>
             <PremiumGate />
           </>
-        )}
-
-        {/* Author bio */}
-        {article.author && (
-          <div className="mt-12 pt-8 border-t border-[#E5E5E0] flex items-start gap-4">
-            {article.author.image && (
-              <div className="relative w-14 h-14 rounded-full overflow-hidden flex-shrink-0">
-                <Image
-                  src={urlFor(article.author.image).width(112).height(112).url()}
-                  alt={article.author.name}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            )}
-            <div>
-              <p className="font-semibold text-sm">{article.author.name}</p>
-              <p className="text-xs text-[#6B6B6B] mt-1">Contributor, The Ethnic Australia</p>
-            </div>
-          </div>
         )}
       </article>
 

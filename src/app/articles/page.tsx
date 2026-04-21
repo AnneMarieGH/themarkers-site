@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
-import { client } from '@/lib/sanity'
-import { articlesQuery, categoriesQuery } from '@/lib/queries'
+import { getPublishedArticles, getCategories } from '@/lib/db'
 import type { Article, Category } from '@/lib/types'
 import { ArticleCard } from '@/components/content/ArticleCard'
 import Link from 'next/link'
@@ -12,41 +11,41 @@ export const metadata: Metadata = {
   description: 'Profiles, perspectives, and stories celebrating Asian Australian excellence.',
 }
 
-async function getData() {
-  const [articles, categories]: [Article[], Category[]] = await Promise.all([
-    client.fetch(articlesQuery).catch(() => []),
-    client.fetch(categoriesQuery).catch(() => []),
+export default async function ArticlesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ category?: string }>
+}) {
+  const { category } = await searchParams
+  const [allArticles, categories]: [Article[], Category[]] = await Promise.all([
+    getPublishedArticles(),
+    getCategories(),
   ])
-  return { articles, categories }
-}
 
-export default async function ArticlesPage() {
-  const { articles, categories } = await getData()
+  const articles = category
+    ? allArticles.filter((a) => a.category?.slug === category)
+    : allArticles
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      {/* Page header */}
       <div className="border-b border-[#E5E5E0] pb-6 mb-8">
         <h1 className="font-serif text-4xl font-bold">Stories</h1>
-        <p className="text-[#6B6B6B] mt-2 text-sm">
-          Profiles, perspectives, and stories celebrating Asian Australian excellence.
-        </p>
+        <p className="text-[#6B6B6B] mt-2 text-sm">Profiles, perspectives, and stories celebrating Asian Australian excellence.</p>
       </div>
 
-      {/* Category filter */}
       {categories.length > 0 && (
         <div className="flex gap-2 flex-wrap mb-8">
           <Link
             href="/articles"
-            className="px-3 py-1.5 text-xs font-semibold uppercase tracking-wider border border-[#1A1A1A] bg-[#1A1A1A] text-white rounded-sm"
+            className={`px-3 py-1.5 text-xs font-semibold uppercase tracking-wider border rounded-sm transition-colors ${!category ? 'border-[#1A1A1A] bg-[#1A1A1A] text-white' : 'border-[#E5E5E0] text-[#6B6B6B] hover:border-[#1A1A1A] hover:text-[#1A1A1A]'}`}
           >
             All
           </Link>
           {categories.map((cat) => (
             <Link
-              key={cat._id}
+              key={cat.id}
               href={`/articles?category=${cat.slug}`}
-              className="px-3 py-1.5 text-xs font-semibold uppercase tracking-wider border border-[#E5E5E0] text-[#6B6B6B] rounded-sm hover:border-[#1A1A1A] hover:text-[#1A1A1A] transition-colors"
+              className={`px-3 py-1.5 text-xs font-semibold uppercase tracking-wider border rounded-sm transition-colors ${category === cat.slug ? 'border-[#1A1A1A] bg-[#1A1A1A] text-white' : 'border-[#E5E5E0] text-[#6B6B6B] hover:border-[#1A1A1A] hover:text-[#1A1A1A]'}`}
             >
               {cat.title}
             </Link>
@@ -54,11 +53,10 @@ export default async function ArticlesPage() {
         </div>
       )}
 
-      {/* Grid */}
       {articles.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {articles.map((article) => (
-            <ArticleCard key={article._id} article={article} />
+            <ArticleCard key={article.id} article={article} />
           ))}
         </div>
       ) : (

@@ -6,7 +6,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
-            <p className="font-serif text-xl font-bold mb-3">The Ethnic Australia</p>
+            <p className="font-serif text-xl font-bold mb-3">The Markers</p>
             <p className="text-[#999] text-sm leading-relaxed max-w-sm">
               A refined publication celebrating Asian Australian entrepreneurs, businesses,
               and individuals making a positive impact on the broader community.
@@ -18,8 +18,8 @@ export function Footer() {
               {[
                 { label: 'All Stories', href: '/articles' },
                 { label: 'Business', href: '/articles?category=business' },
+                { label: 'Careers', href: '/articles?category=careers' },
                 { label: 'Culture', href: '/articles?category=culture' },
-                { label: 'People', href: '/articles?category=people' },
               ].map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} className="text-sm text-[#999] hover:text-white transition-colors">
@@ -48,7 +48,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-10 pt-6 border-t border-[#333] text-[#666] text-xs">
-          © {new Date().getFullYear()} The Ethnic Australia. All rights reserved.
+          © {new Date().getFullYear()} The Markers. All rights reserved.
         </div>
       </div>
     </footer>
