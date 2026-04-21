@@ -74,7 +74,7 @@ export default async function ArticlePage({ params }: Props) {
           </div>
         )}
 
-        <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">{article.title}</h1>
+        <h1 className="font-anton font-normal text-3xl sm:text-4xl lg:text-5xl leading-tight mb-4">{article.title}</h1>
 
         {article.excerpt && (
           <p className="text-[#6B6B6B] text-lg leading-relaxed mb-6 font-serif italic">{article.excerpt}</p>

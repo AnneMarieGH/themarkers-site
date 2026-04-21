@@ -49,7 +49,7 @@ export function ArticleCard({ article, variant = 'default' }: ArticleCardProps) 
             <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-wider mb-2">{categoryTitle}</span>
           )}
           <Link href={`/articles/${article.slug}`}>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold leading-tight hover:text-[#C9A96E] transition-colors">{article.title}</h2>
+            <h2 className="font-anton font-normal text-2xl sm:text-3xl font-bold leading-tight hover:text-[#C9A96E] transition-colors">{article.title}</h2>
           </Link>
           {article.excerpt && (
             <p className="mt-2 text-sm opacity-90 line-clamp-2">{article.excerpt}</p>
@@ -75,7 +75,7 @@ export function ArticleCard({ article, variant = 'default' }: ArticleCardProps) 
           <span className="text-[#C9A96E] text-xs font-semibold uppercase tracking-wider">{categoryTitle}</span>
         )}
         <Link href={`/articles/${article.slug}`}>
-          <h2 className="font-serif text-xl font-bold leading-snug mt-1 group-hover:text-[#C9A96E] transition-colors">{article.title}</h2>
+          <h2 className="font-anton font-normal text-xl font-bold leading-snug mt-1 group-hover:text-[#C9A96E] transition-colors">{article.title}</h2>
         </Link>
         {article.excerpt && (
           <p className="text-sm text-[#6B6B6B] mt-2 line-clamp-3">{article.excerpt}</p>
