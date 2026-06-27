@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
+import { revalidatePath } from 'next/cache'
 import { getSession } from '@/lib/auth'
 import { supabaseAdmin as supabase } from '@/lib/supabase-admin'
 
@@ -8,6 +9,8 @@ const schema = z.object({
   slug: z.string().min(1),
   description: z.string().optional().nullable(),
   color: z.string().optional().nullable(),
+  show_in_nav: z.boolean().optional().nullable(),
+  sort_order: z.number().optional().nullable(),
 })
 
 export async function POST(req: NextRequest) {
@@ -21,5 +24,7 @@ export async function POST(req: NextRequest) {
 
   const { data, error } = await supabase.from('categories').insert(parsed.data).select().single()
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+  revalidatePath('/', 'layout')
+  revalidatePath('/articles')
   return NextResponse.json(data, { status: 201 })
 }

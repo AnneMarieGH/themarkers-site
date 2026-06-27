@@ -45,25 +45,25 @@ export function NewsletterSignup({ variant = 'full' }: { variant?: 'full' | 'inl
     return (
       <div className="max-w-xl">
         {state === 'success' ? (
-          <p className="text-[#C9A96E] font-medium text-sm">You're subscribed. Welcome to The Ethnic Australia.</p>
+          <p className="text-[#E8A020] font-medium text-sm">You're subscribed. Welcome to The Markers.</p>
         ) : (
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col sm:flex-row gap-2">
             <input
               {...register('firstName')}
               type="text"
               placeholder="First name"
-              className="flex-1 px-4 py-2.5 text-sm border border-[#E5E5E0] rounded-sm focus:outline-none focus:border-[#C9A96E] bg-white"
+              className="flex-1 px-4 py-2.5 text-sm border border-[#E5E5E0] rounded-sm focus:outline-none focus:border-[#E8A020] bg-white"
             />
             <input
               {...register('email')}
               type="email"
               placeholder="Email address"
-              className="flex-1 px-4 py-2.5 text-sm border border-[#E5E5E0] rounded-sm focus:outline-none focus:border-[#C9A96E] bg-white"
+              className="flex-1 px-4 py-2.5 text-sm border border-[#E5E5E0] rounded-sm focus:outline-none focus:border-[#E8A020] bg-white"
             />
             <button
               type="submit"
               disabled={state === 'loading'}
-              className="px-6 py-2.5 bg-[#C9A96E] text-white text-sm font-semibold rounded-sm hover:bg-[#A8853A] transition-colors disabled:opacity-60"
+              className="px-6 py-2.5 bg-[#E8A020] text-white text-sm font-semibold rounded-sm hover:bg-[#C8851A] transition-colors disabled:opacity-60"
             >
               {state === 'loading' ? 'Subscribing…' : 'Subscribe'}
             </button>
@@ -77,8 +77,8 @@ export function NewsletterSignup({ variant = 'full' }: { variant?: 'full' | 'inl
   return (
     <section className="bg-[#1A1A1A] text-white py-16 px-4 sm:px-6 lg:px-8 mt-16">
       <div className="max-w-2xl mx-auto text-center">
-        <p className="text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-3">Newsletter</p>
-        <h2 className="font-serif text-3xl sm:text-4xl font-bold mb-4">
+        <p className="text-[#E8A020] text-xs font-semibold uppercase tracking-widest mb-3">Newsletter</p>
+        <h2 className="font-playfair font-bold text-3xl sm:text-4xl mb-4">
           Stories worth reading, delivered to your inbox
         </h2>
         <p className="text-[#999] text-base mb-8 leading-relaxed">
@@ -86,8 +86,8 @@ export function NewsletterSignup({ variant = 'full' }: { variant?: 'full' | 'inl
         </p>
 
         {state === 'success' ? (
-          <div className="bg-[#C9A96E]/10 border border-[#C9A96E]/30 rounded-sm px-6 py-5">
-            <p className="text-[#C9A96E] font-semibold text-lg mb-1">Welcome aboard.</p>
+          <div className="bg-[#E8A020]/10 border border-[#E8A020]/30 rounded-sm px-6 py-5">
+            <p className="text-[#E8A020] font-semibold text-lg mb-1">Welcome aboard.</p>
             <p className="text-[#999] text-sm">Check your inbox for a confirmation email.</p>
           </div>
         ) : (
@@ -97,7 +97,7 @@ export function NewsletterSignup({ variant = 'full' }: { variant?: 'full' | 'inl
                 {...register('firstName')}
                 type="text"
                 placeholder="First name"
-                className="w-full px-4 py-3 text-sm bg-white/10 border border-white/20 rounded-sm text-white placeholder:text-[#666] focus:outline-none focus:border-[#C9A96E] transition-colors"
+                className="w-full px-4 py-3 text-sm bg-white/10 border border-white/20 rounded-sm text-white placeholder:text-[#666] focus:outline-none focus:border-[#E8A020] transition-colors"
               />
               {errors.firstName && <p className="text-red-400 text-xs mt-1 text-left">{errors.firstName.message}</p>}
             </div>
@@ -106,14 +106,14 @@ export function NewsletterSignup({ variant = 'full' }: { variant?: 'full' | 'inl
                 {...register('email')}
                 type="email"
                 placeholder="Email address"
-                className="w-full px-4 py-3 text-sm bg-white/10 border border-white/20 rounded-sm text-white placeholder:text-[#666] focus:outline-none focus:border-[#C9A96E] transition-colors"
+                className="w-full px-4 py-3 text-sm bg-white/10 border border-white/20 rounded-sm text-white placeholder:text-[#666] focus:outline-none focus:border-[#E8A020] transition-colors"
               />
               {errors.email && <p className="text-red-400 text-xs mt-1 text-left">{errors.email.message}</p>}
             </div>
             <button
               type="submit"
               disabled={state === 'loading'}
-              className="px-6 py-3 bg-[#C9A96E] text-white text-sm font-semibold rounded-sm hover:bg-[#A8853A] transition-colors disabled:opacity-60 whitespace-nowrap"
+              className="px-6 py-3 bg-[#E8A020] text-white text-sm font-semibold rounded-sm hover:bg-[#C8851A] transition-colors disabled:opacity-60 whitespace-nowrap"
             >
               {state === 'loading' ? 'Subscribing…' : 'Get the newsletter'}
             </button>

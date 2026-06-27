@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
+import { revalidatePath } from 'next/cache'
 import { getSession } from '@/lib/auth'
 import { supabaseAdmin as supabase } from '@/lib/supabase-admin'
 
@@ -9,11 +10,16 @@ const articleSchema = z.object({
   excerpt: z.string().optional().nullable(),
   content: z.string().optional().nullable(),
   cover_image: z.string().url().optional().nullable().or(z.literal('')),
+  video_url: z.string().url().optional().nullable().or(z.literal('')),
   category_id: z.number().int().positive().optional().nullable(),
   author_name: z.string().optional().nullable(),
-  status: z.enum(['draft', 'published']),
+  status: z.enum(['draft', 'pending_review', 'published']),
   is_featured: z.boolean().default(false),
   is_premium: z.boolean().default(false),
+  article_type: z.enum(['standard', 'video', 'sponsored']).optional().nullable(),
+  meta_title: z.string().optional().nullable(),
+  meta_description: z.string().optional().nullable(),
+  og_image: z.string().url().optional().nullable().or(z.literal('').transform(() => null)),
 })
 
 export async function POST(req: NextRequest) {
@@ -36,6 +42,13 @@ export async function POST(req: NextRequest) {
     .single()
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+
+  if (article?.status === 'published') {
+    revalidatePath('/')
+    revalidatePath('/articles')
+    if (article.slug) revalidatePath(`/articles/${article.slug}`)
+  }
+
   return NextResponse.json(article, { status: 201 })
 }
 

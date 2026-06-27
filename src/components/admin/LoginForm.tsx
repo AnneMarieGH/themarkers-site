@@ -47,7 +47,7 @@ export function LoginForm() {
         <input
           {...register('email')}
           type="email"
-          className="w-full px-4 py-2.5 border border-[#E5E5E0] rounded-sm focus:outline-none focus:border-[#C9A96E] bg-white text-sm"
+          className="w-full px-4 py-2.5 border border-[#E5E5E0] rounded-sm focus:outline-none focus:border-[#E8A020] bg-white text-sm"
         />
         {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
       </div>
@@ -56,7 +56,7 @@ export function LoginForm() {
         <input
           {...register('password')}
           type="password"
-          className="w-full px-4 py-2.5 border border-[#E5E5E0] rounded-sm focus:outline-none focus:border-[#C9A96E] bg-white text-sm"
+          className="w-full px-4 py-2.5 border border-[#E5E5E0] rounded-sm focus:outline-none focus:border-[#E8A020] bg-white text-sm"
         />
         {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
       </div>

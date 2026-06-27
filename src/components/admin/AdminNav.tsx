@@ -8,11 +8,13 @@ interface AdminNavProps {
 }
 
 const links = [
+  { href: '/admin', label: 'Dashboard', icon: '◼', exact: true },
   { href: '/admin/articles', label: 'Articles', icon: '📝' },
-  { href: '/admin/categories', label: 'Categories', icon: '🗂️' },
+  { href: '/admin/media', label: 'Media', icon: '🖼️' },
 ]
 
 const adminLinks = [
+  { href: '/admin/categories', label: 'Categories', icon: '🗂️' },
   { href: '/admin/users', label: 'Users', icon: '👥' },
 ]
 
@@ -36,12 +38,12 @@ export function AdminNav({ role }: AdminNavProps) {
       </div>
       <nav className="flex-1 p-3 space-y-1">
         {allLinks.map((link) => {
-          const active = pathname.startsWith(link.href)
+          const active = (link as {exact?: boolean}).exact ? pathname === link.href : pathname.startsWith(link.href)
           return (
             <Link
               key={link.href}
               href={link.href}
-              className={`flex items-center gap-3 px-3 py-2 rounded-sm text-sm transition-colors ${active ? 'bg-[#C9A96E] text-white' : 'text-[#999] hover:text-white hover:bg-white/10'}`}
+              className={`flex items-center gap-3 px-3 py-2 rounded-sm text-sm transition-colors ${active ? 'bg-[#E8A020] text-white' : 'text-[#999] hover:text-white hover:bg-white/10'}`}
             >
               <span>{link.icon}</span>
               {link.label}

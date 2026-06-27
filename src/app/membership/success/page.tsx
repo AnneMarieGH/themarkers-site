@@ -35,13 +35,13 @@ function SuccessContent() {
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
         <Link
           href="/articles"
-          className="px-6 py-3 bg-[#C9A96E] text-white font-semibold rounded-sm hover:bg-[#A8853A] transition-colors"
+          className="px-6 py-3 bg-[#E8A020] text-white font-semibold rounded-sm hover:bg-[#C8851A] transition-colors"
         >
           Read Premium Stories
         </Link>
         <Link
           href="/membership"
-          className="px-6 py-3 border border-[#E5E5E0] text-[#1A1A1A] font-semibold rounded-sm hover:border-[#C9A96E] transition-colors"
+          className="px-6 py-3 border border-[#E5E5E0] text-[#1A1A1A] font-semibold rounded-sm hover:border-[#E8A020] transition-colors"
         >
           Manage Membership
         </Link>

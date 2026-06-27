@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import { redirect } from 'next/navigation'
+import { getSession } from '@/lib/auth'
 import { getCategories } from '@/lib/db'
 import { CategoriesManager } from '@/components/admin/CategoriesManager'
 
@@ -6,6 +8,9 @@ export const metadata: Metadata = { title: 'Categories | Admin' }
 export const dynamic = 'force-dynamic'
 
 export default async function AdminCategoriesPage() {
+  const session = await getSession()
+  if (session?.role !== 'admin') redirect('/admin/articles')
+
   const categories = await getCategories()
   return (
     <div>

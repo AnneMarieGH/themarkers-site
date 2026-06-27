@@ -3,8 +3,8 @@
 :root {
   --background: #FAFAF8;
   --foreground: #1A1A1A;
-  --accent: #C9A96E;
-  --accent-dark: #A8853A;
+  --accent: #E8A020;
+  --accent-dark: #C8851A;
   --muted: #6B6B6B;
   --border: #E5E5E0;
   --font-inter: 'Inter', system-ui, sans-serif;
@@ -17,7 +17,7 @@
 }
 
 @theme {
-  --font-anton: 'Anton', Impact, sans-serif;
+  --font-playfair: 'Playfair Display', Georgia, serif;
 }
 
 body {
@@ -28,12 +28,27 @@ body {
 }
 
 .font-serif {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: var(--font-playfair);
 }
 
 .prose-editorial {
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 1.125rem;
+  font-family: var(--font-inter);
+  font-size: 1.0625rem;
   line-height: 1.85;
   color: #2A2A2A;
+}
+
+@media (min-width: 768px) {
+  .prose-editorial {
+    font-size: 1.125rem;
+    line-height: 1.85;
+  }
+}
+
+.label-editorial {
+  font-family: var(--font-inter);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }

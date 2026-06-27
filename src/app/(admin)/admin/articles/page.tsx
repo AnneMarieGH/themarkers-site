@@ -1,13 +1,37 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { adminGetAllArticles } from '@/lib/db'
-import { formatDateShort } from '@/lib/utils'
+import { AdminArticlesTable } from '@/components/admin/AdminArticlesTable'
 
 export const metadata: Metadata = { title: 'Articles | Admin' }
 export const dynamic = 'force-dynamic'
 
-export default async function AdminArticlesPage() {
-  const articles = await adminGetAllArticles()
+type Props = { searchParams: Promise<{ status?: string }> }
+
+export default async function AdminArticlesPage({ searchParams }: Props) {
+  const { status } = await searchParams
+  const allArticles = await adminGetAllArticles()
+
+  const drafts = allArticles.filter((a) => a.status === 'draft')
+  const published = allArticles.filter((a) => a.status === 'published')
+  const inReview = allArticles.filter((a) => a.status === 'pending_review')
+
+  const activeTab = status === 'draft' ? 'draft'
+    : status === 'published' ? 'published'
+    : status === 'pending_review' ? 'pending_review'
+    : 'all'
+
+  const articles = activeTab === 'draft' ? drafts
+    : activeTab === 'published' ? published
+    : activeTab === 'pending_review' ? inReview
+    : allArticles
+
+  const tabs = [
+    { key: 'all', label: 'All', count: allArticles.length, href: '/admin/articles' },
+    { key: 'published', label: 'Published', count: published.length, href: '/admin/articles?status=published' },
+    { key: 'pending_review', label: 'In Review', count: inReview.length, href: '/admin/articles?status=pending_review' },
+    { key: 'draft', label: 'Drafts', count: drafts.length, href: '/admin/articles?status=draft' },
+  ]
 
   return (
     <div>
@@ -15,54 +39,33 @@ export default async function AdminArticlesPage() {
         <h1 className="text-xl font-bold">Articles</h1>
         <Link
           href="/admin/articles/new"
-          className="px-4 py-2 bg-[#C9A96E] text-white text-sm font-semibold rounded-sm hover:bg-[#A8853A] transition-colors"
+          className="px-4 py-2 bg-[#E8A020] text-white text-sm font-semibold rounded-sm hover:bg-[#C8851A] transition-colors"
         >
           + New article
         </Link>
       </div>
 
-      <div className="bg-white rounded-sm border border-[#E5E5E0] overflow-hidden">
-        {articles.length === 0 ? (
-          <div className="p-12 text-center text-[#6B6B6B]">
-            <p className="font-serif text-lg mb-2">No articles yet</p>
-            <p className="text-sm">Create your first article to get started.</p>
-          </div>
-        ) : (
-          <table className="w-full text-sm">
-            <thead className="border-b border-[#E5E5E0] bg-[#F5F5F3]">
-              <tr>
-                <th className="text-left px-4 py-3 font-semibold text-[#6B6B6B] text-xs uppercase tracking-wider">Title</th>
-                <th className="text-left px-4 py-3 font-semibold text-[#6B6B6B] text-xs uppercase tracking-wider hidden sm:table-cell">Category</th>
-                <th className="text-left px-4 py-3 font-semibold text-[#6B6B6B] text-xs uppercase tracking-wider">Status</th>
-                <th className="text-left px-4 py-3 font-semibold text-[#6B6B6B] text-xs uppercase tracking-wider hidden md:table-cell">Updated</th>
-                <th className="px-4 py-3"></th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#E5E5E0]">
-              {articles.map((article) => (
-                <tr key={article.id} className="hover:bg-[#F5F5F3] transition-colors">
-                  <td className="px-4 py-3">
-                    <p className="font-medium line-clamp-1">{article.title}</p>
-                    {article.author_name && <p className="text-xs text-[#6B6B6B] mt-0.5">{article.author_name}</p>}
-                  </td>
-                  <td className="px-4 py-3 text-[#6B6B6B] hidden sm:table-cell">{article.category?.title ?? '—'}</td>
-                  <td className="px-4 py-3">
-                    <span className={`inline-flex items-center px-2 py-0.5 rounded-sm text-xs font-semibold ${article.status === 'published' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
-                      {article.status}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-[#6B6B6B] hidden md:table-cell">{formatDateShort(article.updated_at)}</td>
-                  <td className="px-4 py-3">
-                    <Link href={`/admin/articles/${article.id}`} className="text-[#C9A96E] hover:text-[#A8853A] font-medium text-xs">
-                      Edit
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
+      {/* Status filter tabs */}
+      <div className="flex gap-1 mb-4 border-b border-[#E5E5E0]">
+        {tabs.map((tab) => (
+          <Link
+            key={tab.key}
+            href={tab.href}
+            className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 -mb-px ${
+              activeTab === tab.key
+                ? 'border-[#E8A020] text-[#1A1A1A]'
+                : 'border-transparent text-[#6B6B6B] hover:text-[#1A1A1A]'
+            }`}
+          >
+            {tab.label}
+            <span className={`ml-1.5 text-xs px-1.5 py-0.5 rounded-full ${activeTab === tab.key ? 'bg-[#E8A020] text-white' : 'bg-[#E5E5E0] text-[#6B6B6B]'}`}>
+              {tab.count}
+            </span>
+          </Link>
+        ))}
       </div>
+
+      <AdminArticlesTable articles={articles} activeTab={activeTab} />
     </div>
   )
 }

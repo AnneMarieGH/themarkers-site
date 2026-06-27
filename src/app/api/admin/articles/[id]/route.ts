@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
+import { revalidatePath } from 'next/cache'
 import { getSession } from '@/lib/auth'
 import { supabaseAdmin as supabase } from '@/lib/supabase-admin'
 
@@ -9,11 +10,16 @@ const patchSchema = z.object({
   excerpt: z.string().nullable().optional(),
   content: z.string().nullable().optional(),
   cover_image: z.string().url().nullable().optional().or(z.literal('').transform(() => null)),
+  video_url: z.string().url().nullable().optional().or(z.literal('').transform(() => null)),
   category_id: z.number().int().positive().nullable().optional(),
   author_name: z.string().nullable().optional(),
-  status: z.enum(['draft', 'published']).optional(),
+  status: z.enum(['draft', 'pending_review', 'published']).optional(),
   is_featured: z.boolean().optional(),
   is_premium: z.boolean().optional(),
+  article_type: z.enum(['standard', 'video', 'sponsored']).nullable().optional(),
+  meta_title: z.string().nullable().optional(),
+  meta_description: z.string().nullable().optional(),
+  og_image: z.string().url().nullable().optional().or(z.literal('').transform(() => null)),
 })
 
 type Props = { params: Promise<{ id: string }> }
@@ -35,14 +41,34 @@ export async function PATCH(req: NextRequest, { params }: Props) {
     }
   }
 
-  const { data, error } = await supabase
+  const optionalCols = ['article_type', 'meta_title', 'meta_description', 'og_image'] as const
+  let { data, error } = await supabase
     .from('articles')
     .update({ ...updates, updated_at: new Date().toISOString() })
     .eq('id', id)
     .select()
     .single()
 
+  // If the update failed due to missing optional columns, retry without them
+  if (error && optionalCols.some((k) => error!.message?.includes(k))) {
+    optionalCols.forEach((k) => delete (updates as Record<string, unknown>)[k])
+    const retry = await supabase
+      .from('articles')
+      .update({ ...updates, updated_at: new Date().toISOString() })
+      .eq('id', id)
+      .select()
+      .single()
+    data = retry.data
+    error = retry.error
+  }
+
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+
+  // Bust ISR cache whenever an article is saved or published
+  revalidatePath('/')
+  revalidatePath('/articles')
+  if (data?.slug) revalidatePath(`/articles/${data.slug}`)
+
   return NextResponse.json(data)
 }
 

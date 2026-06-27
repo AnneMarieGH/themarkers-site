@@ -8,6 +8,15 @@ const nextConfig: NextConfig = {
         hostname: 'cdn.sanity.io',
         pathname: '/images/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'bgdcwnvsnbwbmlsoaipv.supabase.co',
+      },
+      {
+        // allow any https image host — cover images may come from external URLs
+        protocol: 'https',
+        hostname: '**',
+      },
     ],
   },
 }

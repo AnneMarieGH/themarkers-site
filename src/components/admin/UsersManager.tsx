@@ -92,7 +92,7 @@ export function UsersManager({ users: initial }: { users: AdminUser[] }) {
       {!showForm ? (
         <button
           onClick={() => setShowForm(true)}
-          className="px-4 py-2 bg-[#C9A96E] text-white text-sm font-semibold rounded-sm hover:bg-[#A8853A] transition-colors"
+          className="px-4 py-2 bg-[#E8A020] text-white text-sm font-semibold rounded-sm hover:bg-[#C8851A] transition-colors"
         >
           + Add user
         </button>
@@ -103,12 +103,12 @@ export function UsersManager({ users: initial }: { users: AdminUser[] }) {
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-semibold text-[#6B6B6B] mb-1">Name</label>
-              <input {...register('name')} className="w-full px-3 py-2 border border-[#E5E5E0] rounded-sm text-sm focus:outline-none focus:border-[#C9A96E]" />
+              <input {...register('name')} className="w-full px-3 py-2 border border-[#E5E5E0] rounded-sm text-sm focus:outline-none focus:border-[#E8A020]" />
               {errors.name && <p className="text-red-500 text-xs mt-0.5">{errors.name.message}</p>}
             </div>
             <div>
               <label className="block text-xs font-semibold text-[#6B6B6B] mb-1">Role</label>
-              <select {...register('role')} className="w-full px-3 py-2 border border-[#E5E5E0] rounded-sm text-sm focus:outline-none focus:border-[#C9A96E] bg-white">
+              <select {...register('role')} className="w-full px-3 py-2 border border-[#E5E5E0] rounded-sm text-sm focus:outline-none focus:border-[#E8A020] bg-white">
                 <option value="editor">Editor</option>
                 <option value="admin">Admin</option>
               </select>
@@ -116,16 +116,16 @@ export function UsersManager({ users: initial }: { users: AdminUser[] }) {
           </div>
           <div>
             <label className="block text-xs font-semibold text-[#6B6B6B] mb-1">Email</label>
-            <input {...register('email')} type="email" className="w-full px-3 py-2 border border-[#E5E5E0] rounded-sm text-sm focus:outline-none focus:border-[#C9A96E]" />
+            <input {...register('email')} type="email" className="w-full px-3 py-2 border border-[#E5E5E0] rounded-sm text-sm focus:outline-none focus:border-[#E8A020]" />
             {errors.email && <p className="text-red-500 text-xs mt-0.5">{errors.email.message}</p>}
           </div>
           <div>
             <label className="block text-xs font-semibold text-[#6B6B6B] mb-1">Password</label>
-            <input {...register('password')} type="password" className="w-full px-3 py-2 border border-[#E5E5E0] rounded-sm text-sm focus:outline-none focus:border-[#C9A96E]" />
+            <input {...register('password')} type="password" className="w-full px-3 py-2 border border-[#E5E5E0] rounded-sm text-sm focus:outline-none focus:border-[#E8A020]" />
             {errors.password && <p className="text-red-500 text-xs mt-0.5">{errors.password.message}</p>}
           </div>
           <div className="flex gap-2 pt-1">
-            <button type="submit" disabled={isSubmitting} className="px-4 py-2 bg-[#C9A96E] text-white text-sm font-semibold rounded-sm hover:bg-[#A8853A] transition-colors disabled:opacity-60">
+            <button type="submit" disabled={isSubmitting} className="px-4 py-2 bg-[#E8A020] text-white text-sm font-semibold rounded-sm hover:bg-[#C8851A] transition-colors disabled:opacity-60">
               {isSubmitting ? 'Creating…' : 'Create user'}
             </button>
             <button type="button" onClick={() => { setShowForm(false); reset(); setServerError('') }} className="px-4 py-2 border border-[#E5E5E0] text-sm rounded-sm hover:bg-[#F5F5F3] transition-colors">

@@ -42,9 +42,9 @@ function PricingCard({
   }
 
   return (
-    <div className={`relative border rounded-sm p-8 flex flex-col gap-6 ${recommended ? 'border-[#C9A96E] shadow-md' : 'border-[#E5E5E0]'}`}>
+    <div className={`relative border rounded-sm p-8 flex flex-col gap-6 ${recommended ? 'border-[#E8A020] shadow-md' : 'border-[#E5E5E0]'}`}>
       {recommended && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#C9A96E] text-white text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-sm">
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#E8A020] text-white text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-sm">
           Best Value
         </div>
       )}
@@ -58,10 +58,10 @@ function PricingCard({
         {monthly && <p className="text-xs text-[#6B6B6B] mt-1">Equivalent to {monthly}</p>}
       </div>
       <ul className="space-y-2 text-sm text-[#1A1A1A]">
-        <li className="flex items-center gap-2"><span className="text-[#C9A96E]">✓</span> Unlimited premium articles</li>
-        <li className="flex items-center gap-2"><span className="text-[#C9A96E]">✓</span> Exclusive event access</li>
-        <li className="flex items-center gap-2"><span className="text-[#C9A96E]">✓</span> Members-only community</li>
-        <li className="flex items-center gap-2"><span className="text-[#C9A96E]">✓</span> Cancel anytime</li>
+        <li className="flex items-center gap-2"><span className="text-[#E8A020]">✓</span> Unlimited premium articles</li>
+        <li className="flex items-center gap-2"><span className="text-[#E8A020]">✓</span> Exclusive event access</li>
+        <li className="flex items-center gap-2"><span className="text-[#E8A020]">✓</span> Members-only community</li>
+        <li className="flex items-center gap-2"><span className="text-[#E8A020]">✓</span> Cancel anytime</li>
       </ul>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <input
@@ -70,12 +70,12 @@ function PricingCard({
           onChange={(e) => setEmail(e.target.value)}
           placeholder="your@email.com"
           required
-          className="w-full border border-[#E5E5E0] rounded-sm px-3 py-2 text-sm focus:outline-none focus:border-[#C9A96E]"
+          className="w-full border border-[#E5E5E0] rounded-sm px-3 py-2 text-sm focus:outline-none focus:border-[#E8A020]"
         />
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-3 bg-[#C9A96E] text-white text-sm font-semibold rounded-sm hover:bg-[#A8853A] transition-colors disabled:opacity-60"
+          className="w-full py-3 bg-[#E8A020] text-white text-sm font-semibold rounded-sm hover:bg-[#C8851A] transition-colors disabled:opacity-60"
         >
           {loading ? 'Redirecting…' : 'Get Started'}
         </button>
@@ -121,12 +121,12 @@ function ManagePortal() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="your@email.com"
           required
-          className="w-full border border-[#E5E5E0] rounded-sm px-3 py-2 text-sm focus:outline-none focus:border-[#C9A96E]"
+          className="w-full border border-[#E5E5E0] rounded-sm px-3 py-2 text-sm focus:outline-none focus:border-[#E8A020]"
         />
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-2 border border-[#C9A96E] text-[#C9A96E] text-sm font-semibold rounded-sm hover:bg-[#C9A96E] hover:text-white transition-colors disabled:opacity-60"
+          className="w-full py-2 border border-[#E8A020] text-[#E8A020] text-sm font-semibold rounded-sm hover:bg-[#E8A020] hover:text-white transition-colors disabled:opacity-60"
         >
           {loading ? 'Opening portal…' : 'Open Billing Portal'}
         </button>
@@ -140,7 +140,7 @@ export default function MembershipPage() {
   return (
     <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div className="text-center mb-12">
-        <p className="text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-3">Membership</p>
+        <p className="text-[#E8A020] text-xs font-semibold uppercase tracking-widest mb-3">Membership</p>
         <h1 className="font-serif text-4xl sm:text-5xl font-bold text-[#1A1A1A] mb-4">
           Support independent<br />Asian Australian storytelling.
         </h1>
